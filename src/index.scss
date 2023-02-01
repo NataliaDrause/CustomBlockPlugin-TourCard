@@ -1,1 +1,14 @@
+.wp-admin .tour-block-callout {
+  margin-top: -5px;
+}
 
+.tour-block-select-container {
+  position: relative;
+  z-index: 1;
+  padding: 15px;
+  background-color: #a1a1a1;
+
+  select {
+    width: 100%;
+  }
+}

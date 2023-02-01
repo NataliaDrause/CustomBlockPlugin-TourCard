@@ -1,4 +1,18 @@
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/index.scss ***!
   \***************************************************************************************************************************************************************************************************************************************/
+.wp-admin .tour-block-callout {
+  margin-top: -5px;
+}
 
+.tour-block-select-container {
+  position: relative;
+  z-index: 1;
+  padding: 15px;
+  background-color: #a1a1a1;
+}
+.tour-block-select-container select {
+  width: 100%;
+}
+
+/*# sourceMappingURL=index.css.map*/
