@@ -9,6 +9,8 @@
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+require_once plugin_dir_path(__FILE__) . 'inc/generateTourHTML.php';
+
 class NDToursBlock {
   function __construct() {
     add_action('init', [$this, 'onInit']);
@@ -26,7 +28,14 @@ class NDToursBlock {
   }
 
   function renderCallback($attributes) {
-    return '<p>We will replace this content soon.</p>';
+
+    if ($attributes['tourId']) {
+      wp_enqueue_style('toursBlockStyle');
+      return generateTourHTML($attributes['tourId']);
+    } else {
+      return NULL;
+    }
+
   }
 
 }

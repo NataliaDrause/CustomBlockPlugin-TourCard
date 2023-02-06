@@ -15,4 +15,39 @@
   width: 100%;
 }
 
+.nd-tour-block {
+  margin: 24px 0 24px 0;
+  background-color: #EEEBE9;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+.nd-tour-block__photo {
+  flex-grow: 1;
+  min-width: 100px;
+  max-width: 100%;
+  min-height: 200px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.nd-tour-block__text {
+  flex-grow: 3;
+  max-width: 800px;
+  margin-top: 0;
+  padding: 20px;
+}
+.nd-tour-block h4 {
+  margin-top: 0.6em;
+}
+.nd-tour-block p {
+  font-size: 0.93rem !important;
+  margin: 0 0 14px 0 !important;
+}
+.nd-tour-block footer {
+  margin-bottom: 0.8em;
+}
+
 /*# sourceMappingURL=index.css.map*/
