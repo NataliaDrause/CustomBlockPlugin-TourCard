@@ -1,5 +1,7 @@
 import "./index.scss"
 import {useSelect} from "@wordpress/data"
+import {useState, useEffect} from "react"
+import apiFetch from "@wordpress/api-fetch"
 
 wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   title: "Tours",
@@ -17,11 +19,25 @@ wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
 
 function EditComponent(props) {
 
+  // Preview rendering
+  const [thePreview, setThePreview] = useState("")
+  useEffect(() => {
+    if (props.attributes.tourId) {
+      async function go() {
+        const response = await apiFetch({
+          path: `/ndtourblock/v1/getHTML?tourId=${props.attributes.tourId}`,
+          method: "GET"
+        })
+        setThePreview(response)
+      }
+      go()
+    }
+  }, [props.attributes.tourId])
+
+  // Display the block on the backend
   const allTours = useSelect(select => {
     return select("core").getEntityRecords("postType", "tour", {per_page: -1})
   })
-
-  console.log(allTours)
 
   if (allTours == undefined) return <p>Loading...</p>
 
@@ -39,9 +55,7 @@ function EditComponent(props) {
           })}
         </select>
       </div>
-      <div>
-        The HTML preview of the selected tour will appear here.
-      </div>
+      <div dangerouslySetInnerHTML={{__html: thePreview}}></div>
     </div>
   )
 }

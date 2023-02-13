@@ -14,6 +14,8 @@ require_once plugin_dir_path(__FILE__) . 'inc/generateTourHTML.php';
 class NDToursBlock {
   function __construct() {
     add_action('init', [$this, 'onInit']);
+    //register API for displaying block preview on the backend
+    add_action('rest_api_init', [$this, 'tourHTMLapi']);
   }
 
   function onInit() {
@@ -36,6 +38,18 @@ class NDToursBlock {
       return NULL;
     }
 
+  }
+
+  // Use API for displaying the preview on the backend
+  function tourHTMLapi() {
+    register_rest_route('ndtourblock/v1', 'getHTML', array(
+      'methods' => WP_REST_SERVER::READABLE,
+      'callback' => [$this, 'getTourHTMLapi'],
+    ));
+  }
+
+  function getTourHTMLapi($data) {
+    return generateTourHTML($data['tourId']);
   }
 
 }
