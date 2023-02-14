@@ -19,7 +19,7 @@ class NDToursBlock {
   }
 
   function onInit() {
-    wp_register_script('toursBlockScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-i18n', 'wp-editor'));
+    wp_register_script('toursBlockScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-i18n', 'wp-editor', 'wp-element'));
     wp_register_style('toursBlockStyle', plugin_dir_url(__FILE__) . 'build/index.css');
 
     register_block_type('nd-plugin/nd-tours-block', array(

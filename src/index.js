@@ -1,4 +1,5 @@
 import "./index.scss"
+import {TextControl, Flex, FlexBlock, FlexItem, Button, Icon} from "@wordpress/components"
 import {useSelect} from "@wordpress/data"
 import {useState, useEffect} from "react"
 import apiFetch from "@wordpress/api-fetch"
@@ -54,6 +55,16 @@ function EditComponent(props) {
             )
           })}
         </select>
+        <p>Add bullet points:</p>
+        <Flex>
+          <FlexBlock>
+            <TextControl />
+          </FlexBlock>
+          <FlexItem>
+            <Button variant="link" className="bulletpoint-delete">Delete</Button>
+          </FlexItem>
+        </Flex>
+        <Button variant="primary">Add another answer</Button>
       </div>
       <div dangerouslySetInnerHTML={{__html: thePreview}}></div>
     </div>
