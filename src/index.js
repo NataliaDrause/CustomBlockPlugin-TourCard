@@ -10,7 +10,8 @@ wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   icon: "location-alt",
   category: "common",
   attributes: {
-    tourId: {type: "string"}
+    tourId: {type: "string"},
+    bulletList: {type: "array", default: [""]}
   },
   edit: EditComponent,
   save: function () {
@@ -35,6 +36,14 @@ function EditComponent(props) {
     }
   }, [props.attributes.tourId])
 
+  // Delete a bullet point.
+  function deleteBullet(indexToDelete) {
+    const newBulletList = props.attributes.bulletList.filter(function(x, index) {
+      return index !== indexToDelete
+    })
+    props.setAttributes({bulletList: newBulletList})
+  }
+
   // Display the block on the backend
   const allTours = useSelect(select => {
     return select("core").getEntityRecords("postType", "tour", {per_page: -1})
@@ -56,15 +65,25 @@ function EditComponent(props) {
           })}
         </select>
         <p>Add bullet points:</p>
-        <Flex>
-          <FlexBlock>
-            <TextControl />
-          </FlexBlock>
-          <FlexItem>
-            <Button variant="link" className="bulletpoint-delete">Delete</Button>
-          </FlexItem>
-        </Flex>
-        <Button variant="primary">Add another answer</Button>
+          {props.attributes.bulletList.map(function (bullet, index) {
+            return (
+              <Flex>
+                <FlexBlock>
+                  <TextControl autoFocus={bullet == undefined} value={bullet} onChange={newVal => {
+                    const newBulletList = props.attributes.bulletList.concat([])
+                    newBulletList[index] = newVal
+                    props.setAttributes({bulletList: newBulletList})
+                  }} />
+                </FlexBlock>
+                <FlexItem>
+                  <Button variant="link" className="bulletpoint-delete" onClick={() => deleteBullet(index)}>Delete</Button>
+                </FlexItem>
+              </Flex>
+            )
+          })}
+        <Button variant="primary" onClick={() => {
+          props.setAttributes({bulletList: props.attributes.bulletList.concat([undefined])})
+        }}>Add another answer</Button>
       </div>
       <div dangerouslySetInnerHTML={{__html: thePreview}}></div>
     </div>

@@ -164,6 +164,10 @@ wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   attributes: {
     tourId: {
       type: "string"
+    },
+    bulletList: {
+      type: "array",
+      default: [""]
     }
   },
   edit: EditComponent,
@@ -187,6 +191,16 @@ function EditComponent(props) {
     }
   }, [props.attributes.tourId]);
 
+  // Delete a bullet point.
+  function deleteBullet(indexToDelete) {
+    const newBulletList = props.attributes.bulletList.filter(function (x, index) {
+      return index !== indexToDelete;
+    });
+    props.setAttributes({
+      bulletList: newBulletList
+    });
+  }
+
   // Display the block on the backend
   const allTours = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
     return select("core").getEntityRecords("postType", "tour", {
@@ -209,11 +223,29 @@ function EditComponent(props) {
       value: tour.id,
       selected: props.attributes.tourId == tour.id
     }, tour.title.rendered);
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Add bullet points:"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    variant: "link",
-    className: "bulletpoint-delete"
-  }, "Delete"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    variant: "primary"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Add bullet points:"), props.attributes.bulletList.map(function (bullet, index) {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      autoFocus: bullet == undefined,
+      value: bullet,
+      onChange: newVal => {
+        const newBulletList = props.attributes.bulletList.concat([]);
+        newBulletList[index] = newVal;
+        props.setAttributes({
+          bulletList: newBulletList
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      variant: "link",
+      className: "bulletpoint-delete",
+      onClick: () => deleteBullet(index)
+    }, "Delete")));
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "primary",
+    onClick: () => {
+      props.setAttributes({
+        bulletList: props.attributes.bulletList.concat([undefined])
+      });
+    }
   }, "Add another answer")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     dangerouslySetInnerHTML: {
       __html: thePreview
