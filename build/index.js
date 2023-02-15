@@ -156,6 +156,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+(function () {
+  let locked = false;
+  wp.data.subscribe(function () {
+    const results = wp.data.select("core/block-editor").getBlocks().filter(function (block) {
+      return block.name == "nd-plugin/nd-tours-block" && !block.attributes.tourId;
+    });
+    if (results.length && locked == false) {
+      locked = true;
+      wp.data.dispatch("core/editor").lockPostSaving("noTourSelected");
+    }
+    if (!results.length && locked) {
+      locked = false;
+      wp.data.dispatch("core/editor").unlockPostSaving("noTourSelected");
+    }
+  });
+})();
 wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   title: "Tours",
   description: "Include a short tour description and link to a tour",
