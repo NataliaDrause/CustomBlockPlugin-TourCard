@@ -4,6 +4,7 @@ import {useSelect} from "@wordpress/data"
 import {useState, useEffect} from "react"
 import apiFetch from "@wordpress/api-fetch"
 
+// Update button locker
 (function() {
   let locked = false
   wp.data.subscribe(function() {
@@ -21,6 +22,7 @@ import apiFetch from "@wordpress/api-fetch"
   })
 })()
 
+// Register the Block
 wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   title: "Tours",
   description: "Include a short tour description and link to a tour",
@@ -38,6 +40,7 @@ wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
 
 function EditComponent(props) {
 
+  /*
   // Preview rendering
   const [thePreview, setThePreview] = useState("")
   useEffect(() => {
@@ -51,7 +54,8 @@ function EditComponent(props) {
       }
       go()
     }
-  }, [props.attributes.tourId])
+  }, [props.attributes.tourId, props.attributes.bulletList])
+  */
 
   // Delete a bullet point.
   function deleteBullet(indexToDelete) {
@@ -100,9 +104,9 @@ function EditComponent(props) {
           })}
         <Button variant="primary" onClick={() => {
           props.setAttributes({bulletList: props.attributes.bulletList.concat([undefined])})
-        }}>Add another answer</Button>
+        }}>Add bullet points:</Button>
       </div>
-      <div dangerouslySetInnerHTML={{__html: thePreview}}></div>
+      <div>The preview</div>
     </div>
   )
 }

@@ -156,6 +156,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// Update button locker
 (function () {
   let locked = false;
   wp.data.subscribe(function () {
@@ -172,6 +174,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   });
 })();
+
+// Register the Block
 wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   title: "Tours",
   description: "Include a short tour description and link to a tour",
@@ -192,20 +196,22 @@ wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   }
 });
 function EditComponent(props) {
+  /*
   // Preview rendering
-  const [thePreview, setThePreview] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)("");
-  (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+  const [thePreview, setThePreview] = useState("")
+  useEffect(() => {
     if (props.attributes.tourId) {
       async function go() {
-        const response = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+        const response = await apiFetch({
           path: `/ndtourblock/v1/getHTML?tourId=${props.attributes.tourId}`,
           method: "GET"
-        });
-        setThePreview(response);
+        })
+        setThePreview(response)
       }
-      go();
+      go()
     }
-  }, [props.attributes.tourId]);
+  }, [props.attributes.tourId, props.attributes.bulletList])
+  */
 
   // Delete a bullet point.
   function deleteBullet(indexToDelete) {
@@ -262,11 +268,7 @@ function EditComponent(props) {
         bulletList: props.attributes.bulletList.concat([undefined])
       });
     }
-  }, "Add another answer")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    dangerouslySetInnerHTML: {
-      __html: thePreview
-    }
-  }));
+  }, "Add bullet points:")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "The preview"));
 }
 })();
 
