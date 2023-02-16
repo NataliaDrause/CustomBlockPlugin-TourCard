@@ -9,10 +9,25 @@
   position: relative;
   z-index: 1;
   padding: 15px;
-  background-color: #a1a1a1;
+  border: 1px solid #b8b8b8;
+  background-color: #d6d6d6;
 }
-.tour-block-select-container select {
+.tour-block-select-container p {
+  color: #3a3a3a;
+  font-size: 14px;
+  margin: 20px 0 8px 0;
+}
+.tour-block-select-container select, .tour-block-select-container input {
   width: 100%;
+  background-color: white !important;
+}
+.tour-block-select-container .bulletpoint-delete {
+  color: #ff0000;
+  position: relative;
+  top: -5px;
+}
+.tour-block-select-container .bulletpoint-delete:hover {
+  color: #c20000;
 }
 
 .nd-tour-block {
