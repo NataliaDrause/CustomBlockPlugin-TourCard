@@ -15,7 +15,7 @@ function generateTourHTML($attr) {
       <div class="nd-tour-block__text">
         <h4><?php wp_strip_all_tags(the_title()); ?></h4>
         <?php 
-          if($attr['bulletList']) { ?>
+          if((count($attr) > 1) && $attr['bulletList']) { ?>
             <ul>
               <?php
               foreach ($attr['bulletList'] as $bullet) {

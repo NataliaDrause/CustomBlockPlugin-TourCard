@@ -196,23 +196,6 @@ wp.blocks.registerBlockType("nd-plugin/nd-tours-block", {
   }
 });
 function EditComponent(props) {
-  /*
-  // Preview rendering
-  const [thePreview, setThePreview] = useState("")
-  useEffect(() => {
-    if (props.attributes.tourId) {
-      async function go() {
-        const response = await apiFetch({
-          path: `/ndtourblock/v1/getHTML?tourId=${props.attributes.tourId}`,
-          method: "GET"
-        })
-        setThePreview(response)
-      }
-      go()
-    }
-  }, [props.attributes.tourId, props.attributes.bulletList])
-  */
-
   // Delete a bullet point.
   function deleteBullet(indexToDelete) {
     const newBulletList = props.attributes.bulletList.filter(function (x, index) {
