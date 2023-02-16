@@ -89,7 +89,6 @@ function EditComponent(props) {
           props.setAttributes({bulletList: props.attributes.bulletList.concat([undefined])})
         }}>Add bullet points:</Button>
       </div>
-      <div>The preview</div>
     </div>
   )
 }

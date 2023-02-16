@@ -251,7 +251,7 @@ function EditComponent(props) {
         bulletList: props.attributes.bulletList.concat([undefined])
       });
     }
-  }, "Add bullet points:")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "The preview"));
+  }, "Add bullet points:")));
 }
 })();
 
